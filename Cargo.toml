@@ -4,6 +4,14 @@ version = "0.1.0"
 authors = ["Adam Nemecek <adamnemecek@gmail.com>"]
 edition = "2018"
 
+keywords = ["packing", "bin packing"]
+description = "Rust port of the potpack algorithm"
+license = "MIT"
+repository = "https://github.com/adamnemecek/potpack.git"
+homepage = "https://github.com/adamnemecek/potpack"
+documentation = "https://docs.rs/potpack"
+readme = "README.md"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
