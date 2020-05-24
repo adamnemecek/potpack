@@ -2,7 +2,7 @@
 fn approx_eq(a: f32, b: f32) -> bool {
     (a-b).abs() < 1e-04
 }
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub enum Id {
     None,
     Some(u32)
@@ -17,7 +17,7 @@ impl From<u32> for Id {
 ///
 /// Items we are packing
 ///
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct SizedItem {
     pub id: Id,
     pub w: f32,
@@ -27,7 +27,7 @@ pub struct SizedItem {
 ///
 /// Total sizes
 ///
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Packing {
     pub w: f32,
     pub h: f32,
@@ -37,7 +37,7 @@ pub struct Packing {
 ///
 /// Location of each item.
 ///
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Space {
     pub id: Id,
     pub x: f32,
@@ -177,7 +177,7 @@ impl PotPack {
     }
 }
 
-mod prelude {
+pub mod prelude {
     pub use super::{
         Id,
         Packing,
