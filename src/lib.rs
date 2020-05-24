@@ -1,6 +1,9 @@
 
+pub fn approx_eq(a: f32, b: f32) -> bool {
+    (a-b).abs() < 1e-04
+}
 #[derive(Copy, Clone)]
-pub struct InputSize {
+pub struct SizedItem {
     pub id: u32,
     pub w: f32,
     pub h: f32,
@@ -22,8 +25,8 @@ pub struct Space {
     pub h: f32,
 }
 
-impl From<&InputSize> for Space {
-    fn from(v: &InputSize) -> Self {
+impl From<&SizedItem> for Space {
+    fn from(v: &SizedItem) -> Self {
         Self {
             id: v.id,
             x: 0.0,
@@ -45,14 +48,9 @@ pub struct PotPack {
     pub spaces: Vec<Space>,
 }
 
-pub fn approx_eq(a: f32, b: f32) -> bool {
-    (a-b).abs() < 1e-04
-}
-
-
 impl PotPack {
     pub fn new(
-        boxes: &[InputSize]
+        boxes: &[SizedItem]
     ) -> Self {
         let mut boxes: Vec<Space> = boxes.iter().map(|x|
             x.into()
@@ -162,7 +160,7 @@ mod tests {
     use super::{
         approx_eq,
         PotPack,
-        InputSize
+        SizedItem
     };
 
     #[test]
@@ -177,7 +175,7 @@ mod tests {
         let mut boxes = vec![];
 
         for i in 0..100 {
-            boxes.push(InputSize {
+            boxes.push(SizedItem {
                 id: i,
                 w: i as _,
                 h: i as _
