@@ -219,5 +219,3 @@ mod tests {
         assert!(pack.packing.fill > 0.93);
     }
 }
-
-

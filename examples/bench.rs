@@ -1,15 +1,13 @@
 use potpack::prelude::*;
 
 fn main() {
-    
- 
     let mut input = vec![];
-    for i in (0..1000).into_iter() {
-        let h = ((i%10)*10);
-        println!("width: {}, height: {}", i, h);
+    for i in (0..10000).into_iter() {
+        let h = (i%10)*10;
+        let w = i as _;
         input.push(SizedItem {
             id: i.into(),
-            w: i as _, 
+            w,
             h: h as _
         })
     }
@@ -20,6 +18,5 @@ fn main() {
     let res = now.elapsed();
     println!("{}", res.as_millis());
     println!("width: {}, height: {}, fill: {}", packing.packing.w, packing.packing.h, packing.packing.fill);
-    
-
 }
+
