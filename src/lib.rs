@@ -3,16 +3,19 @@ pub fn approx_eq(a: f32, b: f32) -> bool {
     (a-b).abs() < 1e-04
 }
 #[derive(Copy, Clone)]
-pub struct Id(u32);
+pub enum Id {
+    None,
+    Some(u32)
+}
 
 impl From<u32> for Id {
     fn from(id: u32) -> Self {
-        Id(id)
+        Self::Some(id)
     }
 }
 
 ///
-/// Things we are packing
+/// Items we are packing
 ///
 #[derive(Copy, Clone)]
 pub struct SizedItem {
@@ -21,6 +24,9 @@ pub struct SizedItem {
     pub h: f32,
 }
 
+///
+/// Total sizes
+///
 #[derive(Copy, Clone)]
 pub struct Packing {
     pub w: f32,
@@ -28,6 +34,9 @@ pub struct Packing {
     pub fill: f32
 }
 
+///
+/// Location of each item.
+///
 #[derive(Copy, Clone)]
 pub struct Space {
     pub id: Id,
@@ -84,7 +93,7 @@ impl PotPack {
         let start_width = (area/0.95).sqrt().ceil().max(max_width);
 
         let mut spaces = vec![
-            Space { id: 0.into(), x: 0.0, y: 0.0, w: start_width, h: f32::MAX }
+            Space { id: Id::None, x: 0.0, y: 0.0, w: start_width, h: f32::MAX }
         ];
 
         let mut width: f32 = 0.0;
