@@ -3,8 +3,20 @@ pub fn approx_eq(a: f32, b: f32) -> bool {
     (a-b).abs() < 1e-04
 }
 #[derive(Copy, Clone)]
+pub struct Id(u32);
+
+impl From<u32> for Id {
+    fn from(id: u32) -> Self {
+        Id(id)
+    }
+}
+
+///
+/// Things we are packing
+///
+#[derive(Copy, Clone)]
 pub struct SizedItem {
-    pub id: u32,
+    pub id: Id,
     pub w: f32,
     pub h: f32,
 }
@@ -18,7 +30,7 @@ pub struct Packing {
 
 #[derive(Copy, Clone)]
 pub struct Space {
-    pub id: u32,
+    pub id: Id,
     pub x: f32,
     pub y: f32,
     pub w: f32,
@@ -69,10 +81,10 @@ impl PotPack {
         // sort the boxes for insertion by height, descending
         boxes.sort_by(|a,b| b.h.partial_cmp(&a.h).unwrap());
 
-        let mut start_width = (area/0.95).sqrt().ceil().max(max_width);
+        let start_width = (area/0.95).sqrt().ceil().max(max_width);
 
         let mut spaces = vec![
-            Space { id: 0, x: 0.0, y: 0.0, w: start_width, h: f32::MAX }
+            Space { id: 0.into(), x: 0.0, y: 0.0, w: start_width, h: f32::MAX }
         ];
 
         let mut width: f32 = 0.0;
@@ -176,7 +188,7 @@ mod tests {
 
         for i in 0..100 {
             boxes.push(SizedItem {
-                id: i,
+                id: i.into(),
                 w: i as _,
                 h: i as _
             });
