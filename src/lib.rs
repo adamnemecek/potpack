@@ -1,5 +1,5 @@
 
-pub fn approx_eq(a: f32, b: f32) -> bool {
+fn approx_eq(a: f32, b: f32) -> bool {
     (a-b).abs() < 1e-04
 }
 #[derive(Copy, Clone)]
@@ -175,6 +175,16 @@ impl PotPack {
             spaces
         }
     }
+}
+
+mod prelude {
+    pub use super::{
+        Id,
+        Packing,
+        PotPack,
+        SizedItem,
+        Space
+    };
 }
 
 mod tests {
